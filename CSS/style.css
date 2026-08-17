@@ -23,7 +23,7 @@
 
     --border:#e4e4e4;
 
-    --header-height:80px;
+    --header-height:140px;
     --sidebar-width:280px;
 
     --radius:12px;
@@ -171,9 +171,9 @@ a{
 
 .logo{
 
-    width:120px;
+    width:150px;
 
-    height:120px;
+    height:150px;
 
     object-fit:contain;
 
@@ -181,17 +181,32 @@ a{
 
 .brand h1{
 
-    font-size:1.25rem;
+    font-family:"Cinzel", serif;
+
+    font-size:1.8rem;
 
     font-weight:700;
 
-}
+    letter-spacing:1px;
 
+    color:#d4af37;
+
+    text-transform:uppercase;
+
+}
 .brand p{
+
+    font-family:"Montserrat", sans-serif;
 
     color:#d0d0d0;
 
-    font-size:.85rem;
+    font-size:.9rem;
+
+    font-weight:500;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
 
 }
 
