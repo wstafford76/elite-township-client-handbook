@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Elite Township Properties Interactive Client Handbook">
+    <meta name="author" content="Elite Township Properties">
+
+    <title>Elite Township Properties | Client Handbook</title>
+
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/dashboard.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/print.css" media="print">
+
+    <script defer src="JS/config.js"></script>
+    <script type="module" src="JS/component-loader.js"></script>
+    <script defer src="JS/router.js"></script>
+    <script defer src="JS/app.js"></script>
+</head>
+
+<body>
+
+    <!-- Skip Navigation -->
+    <a class="skip-link" href="#main-content">Skip to Content</a>
+
+    <div id="app">
+
+        <!-- =====================================
+             HEADER
+        ====================================== -->
+
+        <header class="app-header">
+
+            <div class="brand">
+
+                <img
+                    src="Images/ETP Trees.png"
+                    alt="Elite Township Properties Logo"
+                    class="logo">
+
+                <div class="brand-text">
+                    <h1>Elite Township Properties</h1>
+                    <p>Interactive Client Handbook</p>
+                </div>
+
+            </div>
+
+            <div class="header-right">
+
+                <button
+                    id="menuToggle"
+                    class="menu-button"
+                    aria-label="Toggle Navigation">
+
+                    ☰
+
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- =====================================
+             APPLICATION BODY
+        ====================================== -->
+
+        <div class="app-body">
+
+            <!-- Sidebar -->
+
+            <aside
+                id="sidebar"
+                class="sidebar">
+
+                <nav aria-label="Primary Navigation">
+
+                    <ul>
+
+                        <li>
+                            <button class="nav-link active" data-page="dashboard">
+                                Dashboard
+                            </button>
+                        </li>
+
+                        <li>
+                            <button class="nav-link" data-page="buyer">
+                                Buyer Guide
+                            </button>
+                        </li>
+
+                        <li>
+                            <button class="nav-link" data-page="seller">
+                                Seller Guide
+                            </button>
+                        </li>
+
+                        <li>
+                            <button class="nav-link" data-page="tenant">
+                                Tenant Guide
+                            </button>
+                        </li>
+                        
+                        <li>
+                            <button class="nav-link" data-page="landlord">
+                             Landlord Guide
+                              </button>
+                        </li>
+
+                        <li>
+                            <button class="nav-link" data-page="resources">
+                                Resources
+                            </button>
+                        </li>
+
+                        <li>
+                            <button class="nav-link" data-page="forms">
+                                Forms
+                            </button>
+                        </li>
+
+                        <li>
+                            <button class="nav-link" data-page="faq">
+                                FAQ
+                            </button>
+                        </li>
+
+                        <li>
+                            <button class="nav-link" data-page="contact">
+                                Contact
+                            </button>
+                        </li>
+
+                    </ul>
+
+                </nav>
+
+            </aside>
+
+            <!-- Main Content -->
+
+            <main id="main-content">
+
+                <div id="page-container">
+
+                    <div class="loading-screen">
+
+                        <h2>Loading Client Handbook...</h2>
+
+                        <p>
+                            Please wait while your handbook loads.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <footer class="app-footer">
+
+            <p>
+                © 2026 Elite Township Properties. All Rights Reserved.
+            </p>
+
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

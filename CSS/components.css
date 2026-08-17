@@ -1,0 +1,63 @@
+/* ==========================================================
+   Components
+========================================================== */
+
+.hero-banner{
+
+    background:linear-gradient(135deg,#111,#1e1e1e);
+
+    color:#fff;
+
+    padding:80px 40px;
+
+    border-radius:14px;
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+
+}
+
+.hero-banner h1{
+
+    font-size:2.8rem;
+
+    margin-bottom:10px;
+
+}
+
+.hero-tagline{
+
+    font-size:1.2rem;
+
+    color:#d4af37;
+
+    margin-bottom:10px;
+
+}
+
+.hero-subtitle{
+
+    opacity:.85;
+
+    font-size:1rem;
+
+}
+.faq-directory-button {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #c9a94e;
+    color: #1f1f1f;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.faq-directory-button:hover {
+    opacity: 0.85;
+}
