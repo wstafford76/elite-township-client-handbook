@@ -159,13 +159,14 @@ const App = {
                 if (!result) return;
 
                 const page = result.dataset.searchPage;
-               const section = result.dataset.searchSection;
+                  const section = result.dataset.searchSection;
+                  const searchTerm = result.dataset.searchTerm;
 
                 this.closeSearch();
 
                 if (typeof Router !== "undefined") {
 
-                   await Router.loadPage(page, section);
+                  await Router.loadPage(page, section, searchTerm);
 
                     document
                         .querySelectorAll(".nav-link")
@@ -612,10 +613,12 @@ const App = {
 
         this.searchResults.innerHTML = matches.map(result => `
 
-            <button
-    class="search-result"
-    data-search-page="${result.page}"
-    data-search-section="${this.escapeHTML(result.sectionTitle)}">
+           <button
+                class="search-result"
+                data-search-page="${result.page}"
+                data-search-section="${this.escapeHTML(result.sectionTitle)}"
+                data-search-term="${this.escapeHTML(searchTerm)}">
+    
                 <span class="search-result-title">
 
                     ${this.escapeHTML(result.pageTitle)}
