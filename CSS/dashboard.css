@@ -182,15 +182,15 @@
 
     gap:10px;
 
-    background:#d4af37;
+    background:transparent;
 
-    color:#111;
+    color:#d4af37;
 
-    border:none;
+    border:2px solid #d4af37;
 
-    border-radius:8px;
+    border-radius:30px;
 
-    padding:14px 22px;
+    padding:14px 26px;
 
     font:inherit;
 
@@ -198,23 +198,55 @@
 
     font-size:1rem;
 
+    letter-spacing:.3px;
+
     cursor:pointer;
 
-    transition:.25s ease;
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
 
 }
 
 .share-handbook:hover{
 
-    background:#c49b2f;
+    background:#d4af37;
+
+    color:#1a1a1a;
 
     transform:translateY(-2px);
 
-    box-shadow:0 6px 14px rgba(0,0,0,.18);
+    box-shadow:0 8px 18px rgba(212,175,55,.25);
 
 }
-    padding:30px;
 
-    border-radius:10px;
+.share-handbook:active{
+
+    transform:translateY(0);
+
+}
+
+.share-handbook:focus-visible{
+
+    outline:3px solid rgba(212,175,55,.45);
+
+    outline-offset:3px;
+
+}
+
+
+/* Mobile */
+
+@media (max-width:768px){
+
+    .share-handbook{
+
+        width:100%;
+
+        margin-top:5px;
+
+    }
 
 }
