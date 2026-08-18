@@ -470,3 +470,26 @@
     }
 
 }
+/* ==========================================
+   SEARCH SECTION HIGHLIGHT
+========================================== */
+
+.search-section-highlight{
+
+    background:#fff3c4;
+
+    border-radius:6px;
+
+    padding:6px 10px;
+
+    margin-left:-10px;
+
+    box-shadow:
+        0 0 0 3px rgba(212,175,55,.35),
+        0 6px 18px rgba(212,175,55,.18);
+
+    transition:
+        background .4s ease,
+        box-shadow .4s ease;
+
+}
