@@ -613,10 +613,9 @@ const App = {
         this.searchResults.innerHTML = matches.map(result => `
 
             <button
-                class="search-result"
-                data-search-page="${result.page}">
-                data-search-section="${this.escapeHTML(result.sectionTitle)}">
-
+    class="search-result"
+    data-search-page="${result.page}"
+    data-search-section="${this.escapeHTML(result.sectionTitle)}">
                 <span class="search-result-title">
 
                     ${this.escapeHTML(result.pageTitle)}
