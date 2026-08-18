@@ -302,3 +302,171 @@
     transform:rotate(45deg) !important;
 
 }
+/* ==========================================
+   HANDBOOK SEARCH RESULTS
+========================================== */
+
+.search-results{
+
+    margin-top:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    max-height:420px;
+
+    overflow-y:auto;
+
+    padding-right:5px;
+
+}
+
+
+/* Individual Result */
+
+.search-result{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    text-align:left;
+
+    gap:8px;
+
+    padding:18px 20px;
+
+    background:#ffffff;
+
+    border:1px solid #e2e2e2;
+
+    border-left:4px solid #d4af37;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font:inherit;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+
+}
+
+
+/* Hover Effect */
+
+.search-result:hover{
+
+    transform:translateX(4px);
+
+    background:#fafafa;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+
+}
+
+
+/* Result Title */
+
+.search-result-title{
+
+    color:#b8941f;
+
+    font-weight:700;
+
+    font-size:1rem;
+
+}
+
+
+/* Result Preview */
+
+.search-result-preview{
+
+    color:#555555;
+
+    font-size:.9rem;
+
+    line-height:1.5;
+
+}
+
+
+/* Keyboard Accessibility */
+
+.search-result:focus-visible{
+
+    outline:3px solid rgba(212,175,55,.4);
+
+    outline-offset:2px;
+
+}
+
+
+/* Search Placeholder */
+
+.search-placeholder{
+
+    text-align:center;
+
+    color:#777777;
+
+    padding:25px 15px;
+
+    line-height:1.6;
+
+}
+
+
+/* Search Scrollbar */
+
+.search-results::-webkit-scrollbar{
+
+    width:7px;
+
+}
+
+.search-results::-webkit-scrollbar-track{
+
+    background:#f1f1f1;
+
+    border-radius:10px;
+
+}
+
+.search-results::-webkit-scrollbar-thumb{
+
+    background:#d4af37;
+
+    border-radius:10px;
+
+}
+
+
+/* Mobile Search Results */
+
+@media (max-width:768px){
+
+    .search-results{
+
+        max-height:50vh;
+
+    }
+
+    .search-result{
+
+        padding:16px;
+
+    }
+
+}
