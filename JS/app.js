@@ -55,6 +55,47 @@ const App = {
             }
 
         });
+               document.addEventListener("click", async (event) => {
+
+            const shareButton = event.target.closest("#shareHandbook");
+
+            if (!shareButton) return;
+
+            const shareData = {
+                title: "Elite Township Properties | Client Handbook",
+                text: "Check out the Elite Township Properties Interactive Client Handbook.",
+                url: window.location.href
+            };
+
+            try {
+
+                if (navigator.share) {
+
+                    await navigator.share(shareData);
+
+                } else {
+
+                    await navigator.clipboard.writeText(window.location.href);
+
+                    const originalText = shareButton.textContent;
+
+                    shareButton.textContent = "✓ Link Copied!";
+
+                    setTimeout(() => {
+
+                        shareButton.textContent = originalText;
+
+                    }, 2000);
+
+                }
+
+            } catch (error) {
+
+                console.log("Share cancelled or unavailable.");
+
+            }
+
+        });
 
     },
 
