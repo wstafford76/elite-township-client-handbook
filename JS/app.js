@@ -159,12 +159,13 @@ const App = {
                 if (!result) return;
 
                 const page = result.dataset.searchPage;
+               const section = result.dataset.searchSection;
 
                 this.closeSearch();
 
                 if (typeof Router !== "undefined") {
 
-                    await Router.loadPage(page);
+                   await Router.loadPage(page, section);
 
                     document
                         .querySelectorAll(".nav-link")
@@ -614,6 +615,7 @@ const App = {
             <button
                 class="search-result"
                 data-search-page="${result.page}">
+                data-search-section="${this.escapeHTML(result.sectionTitle)}">
 
                 <span class="search-result-title">
 
