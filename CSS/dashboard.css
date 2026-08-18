@@ -168,7 +168,51 @@
 .contact-section{
 
     background:#f7f7f7;
+/* ==========================================
+   Share Handbook Button
+========================================== */
 
+.share-handbook{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    background:#d4af37;
+
+    color:#111;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:14px 22px;
+
+    font:inherit;
+
+    font-weight:700;
+
+    font-size:1rem;
+
+    cursor:pointer;
+
+    transition:.25s ease;
+
+}
+
+.share-handbook:hover{
+
+    background:#c49b2f;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 6px 14px rgba(0,0,0,.18);
+
+}
     padding:30px;
 
     border-radius:10px;
