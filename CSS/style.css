@@ -168,6 +168,15 @@ a{
     right:30px;
 
 }
+.header-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
 
 .logo{
 
