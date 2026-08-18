@@ -1,7 +1,7 @@
 /* ==========================================================
    Elite Township Properties
    Interactive Client Handbook
-   Version 3.1
+   Version 3.2
    app.js
    Handles application UI and handbook search.
    Page routing is handled by router.js.
@@ -398,44 +398,89 @@ const App = {
 
                 temporaryElement.innerHTML = html;
 
-                const text = temporaryElement.textContent
-                    .replace(/\s+/g, " ")
-                    .trim();
 
-                const lowerText = text.toLowerCase();
-
-                const position = lowerText.indexOf(searchTerm);
+                const headings = temporaryElement.querySelectorAll(
+                    "h1, h2, h3, h4, h5, h6"
+                );
 
 
-                if (position !== -1) {
+                if (headings.length === 0) {
 
-                    const start = Math.max(0, position - 80);
+                    const pageText = temporaryElement.textContent
+                        .replace(/\s+/g, " ")
+                        .trim();
 
-                    const end = Math.min(
-                        text.length,
-                        position + searchTerm.length + 120
+                    this.findMatchesInText(
+                        pageText,
+                        searchTerm,
+                        page,
+                        details.title,
+                        details.title,
+                        matches
                     );
 
-                    let preview = text.substring(start, end);
+                } else {
 
-                    if (start > 0) {
+                    headings.forEach((heading, index) => {
 
-                        preview = "..." + preview;
-
-                    }
-
-                    if (end < text.length) {
-
-                        preview = preview + "...";
-
-                    }
+                        const sectionTitle =
+                            heading.textContent.trim() ||
+                            details.title;
 
 
-                    matches.push({
+                        let sectionText = "";
 
-                        page,
-                        title: details.title,
-                        preview
+                        let currentElement =
+                            heading.nextElementSibling;
+
+
+                        while (currentElement) {
+
+                            if (
+                                /^H[1-6]$/.test(
+                                    currentElement.tagName
+                                )
+                            ) {
+
+                                break;
+
+                            }
+
+
+                            sectionText +=
+                                " " +
+                                currentElement.textContent;
+
+
+                            currentElement =
+                                currentElement.nextElementSibling;
+
+                        }
+
+
+                        sectionText = sectionText
+                            .replace(/\s+/g, " ")
+                            .trim();
+
+
+                        if (!sectionText) {
+
+                            sectionText =
+                                heading.parentElement.textContent
+                                    .replace(/\s+/g, " ")
+                                    .trim();
+
+                        }
+
+
+                        this.findMatchesInText(
+                            sectionText,
+                            searchTerm,
+                            page,
+                            details.title,
+                            sectionTitle,
+                            matches
+                        );
 
                     });
 
@@ -453,7 +498,90 @@ const App = {
         }
 
 
-        this.displaySearchResults(matches, searchTerm);
+        this.displaySearchResults(
+            matches.slice(0, 12),
+            searchTerm
+        );
+
+    },
+
+
+    findMatchesInText(
+        text,
+        searchTerm,
+        page,
+        pageTitle,
+        sectionTitle,
+        matches
+    ) {
+
+        const lowerText = text.toLowerCase();
+
+        let position = 0;
+
+        let resultsAdded = 0;
+
+
+        while (resultsAdded < 3) {
+
+            position = lowerText.indexOf(
+                searchTerm,
+                position
+            );
+
+
+            if (position === -1) {
+
+                break;
+
+            }
+
+
+            const start = Math.max(
+                0,
+                position - 60
+            );
+
+
+            const end = Math.min(
+                text.length,
+                position + searchTerm.length + 100
+            );
+
+
+            let preview =
+                text.substring(start, end).trim();
+
+
+            if (start > 0) {
+
+                preview = "..." + preview;
+
+            }
+
+
+            if (end < text.length) {
+
+                preview += "...";
+
+            }
+
+
+            matches.push({
+
+                page,
+                pageTitle,
+                sectionTitle,
+                preview
+
+            });
+
+
+            position += searchTerm.length;
+
+            resultsAdded++;
+
+        }
 
     },
 
@@ -469,7 +597,8 @@ const App = {
 
                 <p class="search-placeholder">
 
-                    No results found for "<strong>${this.escapeHTML(searchTerm)}</strong>".
+                    No results found for
+                    "<strong>${this.escapeHTML(searchTerm)}</strong>".
 
                 </p>
 
@@ -488,19 +617,55 @@ const App = {
 
                 <span class="search-result-title">
 
-                    ${result.title}
+                    ${this.escapeHTML(result.pageTitle)}
+
+                </span>
+
+                <span class="search-result-section">
+
+                    ${this.escapeHTML(result.sectionTitle)}
 
                 </span>
 
                 <span class="search-result-preview">
 
-                    ${this.escapeHTML(result.preview)}
+                    ${this.highlightSearchTerm(
+                        result.preview,
+                        searchTerm
+                    )}
 
                 </span>
 
             </button>
 
         `).join("");
+
+    },
+
+
+    highlightSearchTerm(text, searchTerm) {
+
+        const escapedText = this.escapeHTML(text);
+
+        const expression = new RegExp(
+            `(${this.escapeRegExp(searchTerm)})`,
+            "gi"
+        );
+
+        return escapedText.replace(
+            expression,
+            "<mark>$1</mark>"
+        );
+
+    },
+
+
+    escapeRegExp(text) {
+
+        return text.replace(
+            /[.*+?^${}()|[\]\\]/g,
+            "\\$&"
+        );
 
     },
 
@@ -526,7 +691,9 @@ const App = {
 
         if (window.innerWidth > 768) {
 
-            this.sidebar.classList.remove("sidebar-open");
+            this.sidebar.classList.remove(
+                "sidebar-open"
+            );
 
         }
 
