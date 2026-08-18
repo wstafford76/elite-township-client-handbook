@@ -253,7 +253,7 @@
 
     padding:0;
 
-    transition:.25s ease;
+    position:relative;
 
 }
 
@@ -265,38 +265,40 @@
 
 .search-icon{
 
-    width:17px;
+    width:18px !important;
 
-    height:17px;
+    height:18px !important;
 
-    border:2px solid #d4af37;
+    display:block !important;
 
-    border-radius:50%;
+    position:relative !important;
 
-    position:relative;
+    box-sizing:border-box !important;
 
-    display:block;
+    border:2px solid #d4af37 !important;
+
+    border-radius:50% !important;
 
 }
 
 .search-icon::after{
 
-    content:"";
+    content:"" !important;
 
-    width:8px;
+    position:absolute !important;
 
-    height:2px;
+    width:9px !important;
 
-    background:#d4af37;
+    height:2px !important;
 
-    position:absolute;
+    background:#d4af37 !important;
 
-    right:-6px;
+    border-radius:2px !important;
 
-    bottom:-3px;
+    right:-7px !important;
 
-    transform:rotate(45deg);
+    bottom:-4px !important;
 
-    border-radius:2px;
+    transform:rotate(45deg) !important;
 
 }
