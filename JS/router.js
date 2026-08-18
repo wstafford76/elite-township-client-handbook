@@ -159,63 +159,67 @@ const Router = {
     },
 
 
-    scrollToSection(
-        sectionTitle,
-        searchTerm = null
-    ) {
+scrollToSection(
+    sectionTitle,
+    searchTerm = null
+) {
 
-        const headings =
-            this.container.querySelectorAll(
-                "h1, h2, h3, h4, h5, h6"
-            );
+    const headings =
+        this.container.querySelectorAll(
+            "h1, h2, h3, h4, h5, h6"
+        );
+
+    let target = null;
+
+    headings.forEach(heading => {
+
+        const headingText =
+            heading.textContent
+                .trim()
+                .toLowerCase();
+
+        if (
+            headingText ===
+            sectionTitle.trim().toLowerCase()
+        ) {
+
+            target = heading;
+
+        }
+
+    });
 
 
-        let target = null;
+    if (!target) {
+
+        window.scrollTo(0, 0);
+
+        return;
+
+    }
 
 
-        headings.forEach(heading => {
+    setTimeout(() => {
 
-            const headingText =
-                heading.textContent
-                    .trim()
-                    .toLowerCase();
+        /*
+        Scroll to the section.
+        */
 
+        target.scrollIntoView({
 
-            if (
-                headingText ===
-                sectionTitle.trim().toLowerCase()
-            ) {
+            behavior: "smooth",
 
-                target = heading;
-
-            }
+            block: "center"
 
         });
 
 
-        if (!target) {
-
-            window.scrollTo(0, 0);
-
-            return;
-
-        }
-
+        /*
+        Wait for the scroll animation
+        before applying the highlight.
+        */
 
         setTimeout(() => {
-
-            target.scrollIntoView({
-
-                behavior: "smooth",
-
-                block: "start"
-
-            });
-
-
-            /*
-            Highlight the section heading.
-            */
 
             target.classList.add(
                 "search-section-highlight"
@@ -223,8 +227,8 @@ const Router = {
 
 
             /*
-            Highlight the searched word
-            inside the section.
+            Highlight searched words
+            inside this section.
             */
 
             if (searchTerm) {
@@ -237,18 +241,21 @@ const Router = {
             }
 
 
+            /*
+            Remove section highlight.
+            */
+
             setTimeout(() => {
 
                 target.classList.remove(
                     "search-section-highlight"
                 );
 
-            }, 2500);
+            }, 3000);
 
 
             /*
-            Remove word highlights after
-            5 seconds.
+            Remove word highlights.
             */
 
             setTimeout(() => {
@@ -257,9 +264,11 @@ const Router = {
 
             }, 5000);
 
-        }, 100);
+        }, 700);
 
-    },
+    }, 100);
+
+},
 
 
     highlightSearchTerm(
