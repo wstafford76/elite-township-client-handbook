@@ -24,6 +24,49 @@
 </head>
 
 <body>
+    <!-- =====================================
+     HANDBOOK SEARCH
+===================================== -->
+
+<div id="searchOverlay" class="search-overlay">
+
+    <div class="search-panel">
+
+        <div class="search-header">
+
+            <h2>Search the Handbook</h2>
+
+            <button
+                id="searchClose"
+                class="search-close"
+                aria-label="Close Search">
+
+                ×
+
+            </button>
+
+        </div>
+
+        <input
+            type="search"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search the handbook..."
+            autocomplete="off">
+
+        <div
+            id="searchResults"
+            class="search-results">
+
+            <p class="search-placeholder">
+                Search for topics like closing, inspection, deposits, financing, or leases.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
 
     <!-- Skip Navigation -->
     <a class="skip-link" href="#main-content">Skip to Content</a>
