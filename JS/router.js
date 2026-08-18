@@ -1,7 +1,7 @@
 /* ==========================================================
    Elite Township Properties
    Client Handbook Router
-   Version 3.2
+   Version 3.3
 ========================================================== */
 
 "use strict";
@@ -46,11 +46,7 @@ const Router = {
                 const button =
                     event.target.closest("[data-page]");
 
-                if (!button) {
-
-                    return;
-
-                }
+                if (!button) return;
 
                 const page =
                     button.dataset.page;
@@ -79,7 +75,11 @@ const Router = {
     },
 
 
-    async loadPage(page, sectionTitle = null) {
+    async loadPage(
+        page,
+        sectionTitle = null,
+        searchTerm = null
+    ) {
 
         if (!this.pages[page]) {
 
@@ -135,7 +135,10 @@ const Router = {
 
             if (sectionTitle) {
 
-                this.scrollToSection(sectionTitle);
+                this.scrollToSection(
+                    sectionTitle,
+                    searchTerm
+                );
 
             } else {
 
@@ -156,7 +159,10 @@ const Router = {
     },
 
 
-    scrollToSection(sectionTitle) {
+    scrollToSection(
+        sectionTitle,
+        searchTerm = null
+    ) {
 
         const headings =
             this.container.querySelectorAll(
@@ -196,11 +202,6 @@ const Router = {
         }
 
 
-        /*
-        Small delay ensures the page has
-        fully rendered before scrolling.
-        */
-
         setTimeout(() => {
 
             target.scrollIntoView({
@@ -212,9 +213,28 @@ const Router = {
             });
 
 
+            /*
+            Highlight the section heading.
+            */
+
             target.classList.add(
                 "search-section-highlight"
             );
+
+
+            /*
+            Highlight the searched word
+            inside the section.
+            */
+
+            if (searchTerm) {
+
+                this.highlightSearchTerm(
+                    target,
+                    searchTerm
+                );
+
+            }
 
 
             setTimeout(() => {
@@ -225,7 +245,230 @@ const Router = {
 
             }, 2500);
 
+
+            /*
+            Remove word highlights after
+            5 seconds.
+            */
+
+            setTimeout(() => {
+
+                this.removeSearchHighlights();
+
+            }, 5000);
+
         }, 100);
+
+    },
+
+
+    highlightSearchTerm(
+        target,
+        searchTerm
+    ) {
+
+        const sectionElements = [];
+
+        let currentElement =
+            target.nextElementSibling;
+
+
+        /*
+        Collect everything after the heading
+        until the next heading.
+        */
+
+        while (currentElement) {
+
+            if (
+                /^H[1-6]$/.test(
+                    currentElement.tagName
+                )
+            ) {
+
+                break;
+
+            }
+
+
+            sectionElements.push(
+                currentElement
+            );
+
+
+            currentElement =
+                currentElement.nextElementSibling;
+
+        }
+
+
+        const expression = new RegExp(
+            `(${this.escapeRegExp(searchTerm)})`,
+            "gi"
+        );
+
+
+        sectionElements.forEach(element => {
+
+            this.highlightTextInElement(
+                element,
+                expression
+            );
+
+        });
+
+    },
+
+
+    highlightTextInElement(
+        element,
+        expression
+    ) {
+
+        const walker =
+            document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT,
+                {
+
+                    acceptNode(node) {
+
+                        if (
+                            !node.nodeValue
+                                .trim()
+                                .match(expression)
+                        ) {
+
+                            return NodeFilter.FILTER_REJECT;
+
+                        }
+
+
+                        if (
+                            node.parentElement.closest(
+                                "script, style, mark"
+                            )
+                        ) {
+
+                            return NodeFilter.FILTER_REJECT;
+
+                        }
+
+
+                        return NodeFilter.FILTER_ACCEPT;
+
+                    }
+
+                }
+            );
+
+
+        const nodes = [];
+
+
+        while (walker.nextNode()) {
+
+            nodes.push(
+                walker.currentNode
+            );
+
+        }
+
+
+        nodes.forEach(node => {
+
+            const fragment =
+                document.createDocumentFragment();
+
+
+            const parts =
+                node.nodeValue.split(
+                    expression
+                );
+
+
+            parts.forEach(part => {
+
+                if (!part) return;
+
+
+                if (
+                    part.toLowerCase() ===
+                    searchTerm.toLowerCase()
+                ) {
+
+                    const mark =
+                        document.createElement("mark");
+
+
+                    mark.className =
+                        "search-word-highlight";
+
+
+                    mark.textContent =
+                        part;
+
+
+                    fragment.appendChild(
+                        mark
+                    );
+
+                } else {
+
+                    fragment.appendChild(
+                        document.createTextNode(part)
+                    );
+
+                }
+
+            });
+
+
+            node.parentNode.replaceChild(
+                fragment,
+                node
+            );
+
+        });
+
+    },
+
+
+    removeSearchHighlights() {
+
+        const highlights =
+            this.container.querySelectorAll(
+                ".search-word-highlight"
+            );
+
+
+        highlights.forEach(mark => {
+
+            const textNode =
+                document.createTextNode(
+                    mark.textContent
+                );
+
+
+            mark.parentNode.replaceChild(
+                textNode,
+                mark
+            );
+
+        });
+
+
+        this.container.normalize();
+
+    },
+
+
+    escapeRegExp(text) {
+
+        return text.replace(
+            /[.*+?^${}()|[\]\\]/g,
+            "\\$&"
+        );
 
     },
 
