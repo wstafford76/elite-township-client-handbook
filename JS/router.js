@@ -1,7 +1,7 @@
 /* ==========================================================
    Elite Township Properties
    Client Handbook Router
-   Version 3.1
+   Version 3.2
 ========================================================== */
 
 "use strict";
@@ -9,6 +9,7 @@
 const Router = {
 
     pages: {
+
         dashboard: "Pages/dashboard.html",
         buyer: "Pages/buyer.html",
         seller: "Pages/seller.html",
@@ -18,13 +19,16 @@ const Router = {
         forms: "Pages/forms.html",
         faq: "Pages/faq.html",
         contact: "Pages/contact.html"
+
     },
 
     container: null,
 
+
     async initialize() {
 
-        this.container = document.getElementById("page-container");
+        this.container =
+            document.getElementById("page-container");
 
         this.bindNavigation();
 
@@ -32,33 +36,50 @@ const Router = {
 
     },
 
+
     bindNavigation() {
 
-    document.addEventListener("click", async (event) => {
+        document.addEventListener(
+            "click",
+            async (event) => {
 
-        const button = event.target.closest("[data-page]");
+                const button =
+                    event.target.closest("[data-page]");
 
-        if (!button) {
-            return;
-        }
+                if (!button) {
 
-        const page = button.dataset.page;
+                    return;
 
-        await this.loadPage(page);
+                }
 
-        document
-            .querySelectorAll(".nav-link")
-            .forEach(btn => btn.classList.remove("active"));
+                const page =
+                    button.dataset.page;
 
-        if (button.classList.contains("nav-link")) {
-            button.classList.add("active");
-        }
+                await this.loadPage(page);
 
-    });
 
-},
+                document
+                    .querySelectorAll(".nav-link")
+                    .forEach(btn =>
+                        btn.classList.remove("active")
+                    );
 
-    async loadPage(page) {
+
+                if (
+                    button.classList.contains("nav-link")
+                ) {
+
+                    button.classList.add("active");
+
+                }
+
+            }
+        );
+
+    },
+
+
+    async loadPage(page, sectionTitle = null) {
 
         if (!this.pages[page]) {
 
@@ -68,29 +89,59 @@ const Router = {
 
         }
 
+
         try {
 
             this.container.innerHTML = `
+
                 <div class="loading-screen">
+
                     <h2>Loading...</h2>
+
                 </div>
+
             `;
 
-            const response = await fetch(this.pages[page]);
+
+            const response =
+                await fetch(this.pages[page]);
+
 
             if (!response.ok) {
 
-                throw new Error("Unable to load page.");
+                throw new Error(
+                    "Unable to load page."
+                );
 
             }
 
-            const html = await response.text();
+
+            const html =
+                await response.text();
+
 
             this.container.innerHTML = html;
-            window.scrollTo(0, 0);
+
 
             document.title =
                 `Elite Township Properties | ${this.getTitle(page)}`;
+
+
+            /*
+            =====================================
+            SEARCH RESULT NAVIGATION
+            =====================================
+            */
+
+            if (sectionTitle) {
+
+                this.scrollToSection(sectionTitle);
+
+            } else {
+
+                window.scrollTo(0, 0);
+
+            }
 
         }
 
@@ -103,6 +154,81 @@ const Router = {
         }
 
     },
+
+
+    scrollToSection(sectionTitle) {
+
+        const headings =
+            this.container.querySelectorAll(
+                "h1, h2, h3, h4, h5, h6"
+            );
+
+
+        let target = null;
+
+
+        headings.forEach(heading => {
+
+            const headingText =
+                heading.textContent
+                    .trim()
+                    .toLowerCase();
+
+
+            if (
+                headingText ===
+                sectionTitle.trim().toLowerCase()
+            ) {
+
+                target = heading;
+
+            }
+
+        });
+
+
+        if (!target) {
+
+            window.scrollTo(0, 0);
+
+            return;
+
+        }
+
+
+        /*
+        Small delay ensures the page has
+        fully rendered before scrolling.
+        */
+
+        setTimeout(() => {
+
+            target.scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "start"
+
+            });
+
+
+            target.classList.add(
+                "search-section-highlight"
+            );
+
+
+            setTimeout(() => {
+
+                target.classList.remove(
+                    "search-section-highlight"
+                );
+
+            }, 2500);
+
+        }, 100);
+
+    },
+
 
     getTitle(page) {
 
@@ -128,9 +254,11 @@ const Router = {
 
         };
 
-        return titles[page] || "Client Handbook";
+        return titles[page] ||
+            "Client Handbook";
 
     },
+
 
     showError(page) {
 
@@ -142,7 +270,8 @@ const Router = {
 
                 <p>
 
-                    The page "${page}" could not be loaded.
+                    The page "${page}"
+                    could not be loaded.
 
                 </p>
 
@@ -154,8 +283,12 @@ const Router = {
 
 };
 
-document.addEventListener("DOMContentLoaded", () => {
 
-    Router.initialize();
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-});
+        Router.initialize();
+
+    }
+);
