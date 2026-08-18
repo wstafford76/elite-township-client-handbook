@@ -25,12 +25,19 @@ const App = {
 
         this.sidebar = document.getElementById("sidebar");
         this.menuButton = document.getElementById("menuToggle");
-         this.searchToggle = document.getElementById("searchToggle");
-      this.searchOverlay = document.getElementById("searchOverlay");
+
+        this.searchToggle = document.getElementById("searchToggle");
+        this.searchOverlay = document.getElementById("searchOverlay");
+        this.searchClose = document.getElementById("searchClose");
+        this.searchInput = document.getElementById("searchInput");
 
     },
 
     bindEvents() {
+
+        /* ==============================
+           SIDEBAR MENU
+        ============================== */
 
         if (this.menuButton) {
 
@@ -42,31 +49,102 @@ const App = {
 
         }
 
+
+        /* ==============================
+           SEARCH OPEN
+        ============================== */
+
+        if (this.searchToggle) {
+
+            this.searchToggle.addEventListener("click", () => {
+
+                this.openSearch();
+
+            });
+
+        }
+
+
+        /* ==============================
+           SEARCH CLOSE BUTTON
+        ============================== */
+
+        if (this.searchClose) {
+
+            this.searchClose.addEventListener("click", () => {
+
+                this.closeSearch();
+
+            });
+
+        }
+
+
+        /* ==============================
+           WINDOW RESIZE
+        ============================== */
+
         window.addEventListener("resize", () => {
 
             this.handleResize();
 
         });
 
+
+        /* ==============================
+           ESCAPE KEY
+        ============================== */
+
         document.addEventListener("keydown", (event) => {
 
             if (event.key === "Escape") {
 
                 this.closeSidebar();
+                this.closeSearch();
 
             }
 
         });
-               document.addEventListener("click", async (event) => {
+
+
+        /* ==============================
+           CLOSE SEARCH WHEN CLICKING
+           OUTSIDE THE SEARCH PANEL
+        ============================== */
+
+        if (this.searchOverlay) {
+
+            this.searchOverlay.addEventListener("click", (event) => {
+
+                if (event.target === this.searchOverlay) {
+
+                    this.closeSearch();
+
+                }
+
+            });
+
+        }
+
+
+        /* ==============================
+           SHARE HANDBOOK
+        ============================== */
+
+        document.addEventListener("click", async (event) => {
 
             const shareButton = event.target.closest("#shareHandbook");
 
             if (!shareButton) return;
 
             const shareData = {
+
                 title: "Elite Township Properties | Client Handbook",
+
                 text: "Check out the Elite Township Properties Interactive Client Handbook.",
+
                 url: window.location.href
+
             };
 
             try {
@@ -101,6 +179,11 @@ const App = {
 
     },
 
+
+    /* ==============================
+       SIDEBAR FUNCTIONS
+    ============================== */
+
     toggleSidebar() {
 
         if (!this.sidebar) return;
@@ -117,6 +200,42 @@ const App = {
 
     },
 
+
+    /* ==============================
+       SEARCH FUNCTIONS
+    ============================== */
+
+    openSearch() {
+
+        if (!this.searchOverlay) return;
+
+        this.searchOverlay.classList.add("search-open");
+
+        setTimeout(() => {
+
+            if (this.searchInput) {
+
+                this.searchInput.focus();
+
+            }
+
+        }, 50);
+
+    },
+
+    closeSearch() {
+
+        if (!this.searchOverlay) return;
+
+        this.searchOverlay.classList.remove("search-open");
+
+    },
+
+
+    /* ==============================
+       RESPONSIVE HANDLING
+    ============================== */
+
     handleResize() {
 
         if (!this.sidebar) return;
@@ -130,6 +249,7 @@ const App = {
     }
 
 };
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
