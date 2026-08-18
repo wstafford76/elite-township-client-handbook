@@ -1,7 +1,7 @@
 /* ==========================================================
    Elite Township Properties
    Client Handbook Router
-   Version 3.3
+   Version 3.4
 ========================================================== */
 
 "use strict";
@@ -159,76 +159,54 @@ const Router = {
     },
 
 
-scrollToSection(
-    sectionTitle,
-    searchTerm = null
-) {
+    scrollToSection(
+        sectionTitle,
+        searchTerm = null
+    ) {
 
-    const headings =
-        this.container.querySelectorAll(
-            "h1, h2, h3, h4, h5, h6"
-        );
-
-    let target = null;
-
-    headings.forEach(heading => {
-
-        const headingText =
-            heading.textContent
-                .trim()
-                .toLowerCase();
-
-        if (
-            headingText ===
-            sectionTitle.trim().toLowerCase()
-        ) {
-
-            target = heading;
-
-        }
-
-    });
+        const headings =
+            this.container.querySelectorAll(
+                "h1, h2, h3, h4, h5, h6"
+            );
 
 
-    if (!target) {
-
-        window.scrollTo(0, 0);
-
-        return;
-
-    }
+        let target = null;
 
 
-    setTimeout(() => {
+        headings.forEach(heading => {
 
-        /*
-        Scroll to the section.
-        */
+            const headingText =
+                heading.textContent
+                    .trim()
+                    .toLowerCase();
 
-        target.scrollIntoView({
 
-            behavior: "smooth",
+            if (
+                headingText ===
+                sectionTitle.trim().toLowerCase()
+            ) {
 
-            block: "center"
+                target = heading;
+
+            }
 
         });
 
 
-        /*
-        Wait for the scroll animation
-        before applying the highlight.
-        */
+        if (!target) {
+
+            window.scrollTo(0, 0);
+
+            return;
+
+        }
+
 
         setTimeout(() => {
 
-            target.classList.add(
-                "search-section-highlight"
-            );
-
-
             /*
-            Highlight searched words
-            inside this section.
+            Highlight the searched text
+            inside the section first.
             */
 
             if (searchTerm) {
@@ -242,33 +220,96 @@ scrollToSection(
 
 
             /*
-            Remove section highlight.
+            Find the first highlighted match.
             */
 
-            setTimeout(() => {
-
-                target.classList.remove(
-                    "search-section-highlight"
+            const firstMatch =
+                this.container.querySelector(
+                    ".search-word-highlight"
                 );
 
-            }, 3000);
+
+            if (firstMatch) {
+
+                /*
+                Scroll directly to the actual
+                searched text.
+                */
+
+                firstMatch.scrollIntoView({
+
+                    behavior: "smooth",
+
+                    block: "center"
+
+                });
+
+
+                /*
+                Highlight the content block
+                containing the searched text.
+                */
+
+                const matchContainer =
+                    firstMatch.closest(
+                        "p, li, td, th, blockquote, article, section, div"
+                    );
+
+
+                if (matchContainer) {
+
+                    setTimeout(() => {
+
+                        matchContainer.classList.add(
+                            "search-match-container"
+                        );
+
+                    }, 500);
+
+
+                    setTimeout(() => {
+
+                        matchContainer.classList.remove(
+                            "search-match-container"
+                        );
+
+                    }, 4500);
+
+                }
+
+            } else {
+
+                /*
+                If no exact word match is found,
+                scroll to the section heading.
+                */
+
+                target.scrollIntoView({
+
+                    behavior: "smooth",
+
+                    block: "center"
+
+                });
+
+            }
 
 
             /*
-            Remove word highlights.
+            Remove word highlights after
+            6 seconds.
             */
 
             setTimeout(() => {
 
                 this.removeSearchHighlights();
 
-            }, 5000);
+            }, 6000);
 
-        }, 700);
 
-    }, 100);
+        }, 150);
 
-},
+    },
 
 
     highlightSearchTerm(
@@ -283,8 +324,8 @@ scrollToSection(
 
 
         /*
-        Collect everything after the heading
-        until the next heading.
+        Collect all content after the section
+        heading until the next heading.
         */
 
         while (currentElement) {
@@ -317,11 +358,17 @@ scrollToSection(
         );
 
 
+        /*
+        Highlight matching text in the
+        section content.
+        */
+
         sectionElements.forEach(element => {
 
             this.highlightTextInElement(
                 element,
-                expression
+                expression,
+                searchTerm
             );
 
         });
@@ -331,7 +378,8 @@ scrollToSection(
 
     highlightTextInElement(
         element,
-        expression
+        expression,
+        searchTerm
     ) {
 
         const walker =
