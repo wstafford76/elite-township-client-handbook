@@ -229,3 +229,74 @@
     }
 
 }
+/* ==========================================
+   HEADER SEARCH BUTTON
+========================================== */
+
+.search-button{
+
+    width:44px;
+
+    height:44px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:transparent;
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:0;
+
+    transition:.25s ease;
+
+}
+
+.search-button:hover{
+
+    transform:scale(1.08);
+
+}
+
+.search-icon{
+
+    width:17px;
+
+    height:17px;
+
+    border:2px solid #d4af37;
+
+    border-radius:50%;
+
+    position:relative;
+
+    display:block;
+
+}
+
+.search-icon::after{
+
+    content:"";
+
+    width:8px;
+
+    height:2px;
+
+    background:#d4af37;
+
+    position:absolute;
+
+    right:-6px;
+
+    bottom:-3px;
+
+    transform:rotate(45deg);
+
+    border-radius:2px;
+
+}
