@@ -25,6 +25,8 @@ const App = {
 
         this.sidebar = document.getElementById("sidebar");
         this.menuButton = document.getElementById("menuToggle");
+         this.searchToggle = document.getElementById("searchToggle");
+      this.searchOverlay = document.getElementById("searchOverlay");
 
     },
 
