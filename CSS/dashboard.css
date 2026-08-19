@@ -197,6 +197,8 @@
 
     border:1px solid #e2e2e2;
 
+    border-left:5px solid #d4af37;
+
     border-radius:12px;
 
     padding:0 20px 25px;
@@ -205,7 +207,6 @@
         transform .25s ease,
         box-shadow .25s ease,
         border-color .25s ease;
-
 }
 
 
