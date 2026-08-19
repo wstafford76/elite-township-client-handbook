@@ -380,186 +380,77 @@ const App = {
             }
         );
 
-<!-- =====================================
-     POPULAR TOPICS
-===================================== -->
+/* ==============================
+   POPULAR TOPICS
+============================== */
 
-<section class="dashboard-section popular-topics">
+document.addEventListener(
+    "click",
+    async (event) => {
 
-    <div class="section-intro">
+        const topic =
+            event.target.closest(
+                ".topic-card"
+            );
 
-        <h2>Popular Topics</h2>
+        if (!topic) return;
 
-        <p>
-            Jump directly to some of the most important information in
-            your real estate journey.
-        </p>
 
-    </div>
+        const page =
+            topic.dataset.page;
 
+        const section =
+            topic.dataset.section;
 
-    <div class="topics-grid">
+        const searchTerm =
+            topic.dataset.term;
 
 
-        <!-- FINANCING -->
+        if (!page) return;
 
-        <button
-            class="topic-card"
-            data-page="buyer"
-            data-section="Financing"
-            data-term="financing">
 
-            <span class="topic-icon">💰</span>
+        if (
+            typeof Router !== "undefined"
+        ) {
 
-            <span class="topic-content">
+            await Router.loadPage(
+                page,
+                section || null,
+                searchTerm || null
+            );
 
-                <strong>Financing</strong>
 
-                <small>
-                    Learn about mortgage options, pre-approval,
-                    and preparing to buy a home.
-                </small>
+            document
+                .querySelectorAll(
+                    ".nav-link"
+                )
+                .forEach(button => {
 
-            </span>
+                    button.classList.remove(
+                        "active"
+                    );
 
-            <span class="topic-arrow">→</span>
+                });
 
-        </button>
 
+            const navButton =
+                document.querySelector(
+                    `.nav-link[data-page="${page}"]`
+                );
 
-        <!-- HOME INSPECTIONS -->
 
-        <button
-            class="topic-card"
-            data-page="buyer"
-            data-section="Home Inspection"
-            data-term="inspection">
+            if (navButton) {
 
-            <span class="topic-icon">🔍</span>
+                navButton.classList.add(
+                    "active"
+                );
 
-            <span class="topic-content">
+            }
 
-                <strong>Home Inspections</strong>
+        }
 
-                <small>
-                    Understand inspections, common findings,
-                    and what happens next.
-                </small>
-
-            </span>
-
-            <span class="topic-arrow">→</span>
-
-        </button>
-
-
-        <!-- SELLER PRICING -->
-
-        <button
-            class="topic-card"
-            data-page="seller"
-            data-section="Pricing Your Home"
-            data-term="pricing">
-
-            <span class="topic-icon">📊</span>
-
-            <span class="topic-content">
-
-                <strong>Pricing Your Home</strong>
-
-                <small>
-                    Learn how market conditions and comparable
-                    properties help determine pricing.
-                </small>
-
-            </span>
-
-            <span class="topic-arrow">→</span>
-
-        </button>
-
-
-        <!-- SECURITY DEPOSITS -->
-
-        <button
-            class="topic-card"
-            data-page="tenant"
-            data-section="Security Deposit"
-            data-term="deposit">
-
-            <span class="topic-icon">🔑</span>
-
-            <span class="topic-content">
-
-                <strong>Security Deposits</strong>
-
-                <small>
-                    Understand deposits, move-in requirements,
-                    and important tenant responsibilities.
-                </small>
-
-            </span>
-
-            <span class="topic-arrow">→</span>
-
-        </button>
-
-
-        <!-- PREPARING RENTAL -->
-
-        <button
-            class="topic-card"
-            data-page="landlord"
-            data-section="Preparing Your Property"
-            data-term="preparing">
-
-            <span class="topic-icon">🏘️</span>
-
-            <span class="topic-content">
-
-                <strong>Preparing Your Rental</strong>
-
-                <small>
-                    Get your property ready for marketing,
-                    tenants, and a successful lease.
-                </small>
-
-            </span>
-
-            <span class="topic-arrow">→</span>
-
-        </button>
-
-
-        <!-- MOVING IN -->
-
-        <button
-            class="topic-card"
-            data-page="tenant"
-            data-section="Moving In"
-            data-term="move-in">
-
-            <span class="topic-icon">📦</span>
-
-            <span class="topic-content">
-
-                <strong>Moving In</strong>
-
-                <small>
-                    Review the important steps to take before
-                    and during your move-in.
-                </small>
-
-            </span>
-
-            <span class="topic-arrow">→</span>
-
-        </button>
-
-
-    </div>
-
-</section>
+    }
+);
 
     /* ==============================
        SIDEBAR FUNCTIONS
