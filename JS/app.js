@@ -1,7 +1,7 @@
 /* ==========================================================
    Elite Township Properties
    Interactive Client Handbook
-   Version 3.2
+   Version 3.3
    app.js
    Handles application UI and handbook search.
    Page routing is handled by router.js.
@@ -12,6 +12,7 @@
 const App = {
 
     searchPages: {
+
         dashboard: {
             title: "Dashboard",
             path: "Pages/dashboard.html"
@@ -56,6 +57,7 @@ const App = {
             title: "Contact",
             path: "Pages/contact.html"
         }
+
     },
 
 
@@ -72,14 +74,26 @@ const App = {
 
     cacheElements() {
 
-        this.sidebar = document.getElementById("sidebar");
-        this.menuButton = document.getElementById("menuToggle");
+        this.sidebar =
+            document.getElementById("sidebar");
 
-        this.searchToggle = document.getElementById("searchToggle");
-        this.searchOverlay = document.getElementById("searchOverlay");
-        this.searchClose = document.getElementById("searchClose");
-        this.searchInput = document.getElementById("searchInput");
-        this.searchResults = document.getElementById("searchResults");
+        this.menuButton =
+            document.getElementById("menuToggle");
+
+        this.searchToggle =
+            document.getElementById("searchToggle");
+
+        this.searchOverlay =
+            document.getElementById("searchOverlay");
+
+        this.searchClose =
+            document.getElementById("searchClose");
+
+        this.searchInput =
+            document.getElementById("searchInput");
+
+        this.searchResults =
+            document.getElementById("searchResults");
 
     },
 
@@ -92,11 +106,14 @@ const App = {
 
         if (this.menuButton) {
 
-            this.menuButton.addEventListener("click", () => {
+            this.menuButton.addEventListener(
+                "click",
+                () => {
 
-                this.toggleSidebar();
+                    this.toggleSidebar();
 
-            });
+                }
+            );
 
         }
 
@@ -107,11 +124,14 @@ const App = {
 
         if (this.searchToggle) {
 
-            this.searchToggle.addEventListener("click", () => {
+            this.searchToggle.addEventListener(
+                "click",
+                () => {
 
-                this.openSearch();
+                    this.openSearch();
 
-            });
+                }
+            );
 
         }
 
@@ -122,11 +142,14 @@ const App = {
 
         if (this.searchClose) {
 
-            this.searchClose.addEventListener("click", () => {
+            this.searchClose.addEventListener(
+                "click",
+                () => {
 
-                this.closeSearch();
+                    this.closeSearch();
 
-            });
+                }
+            );
 
         }
 
@@ -137,11 +160,16 @@ const App = {
 
         if (this.searchInput) {
 
-            this.searchInput.addEventListener("input", () => {
+            this.searchInput.addEventListener(
+                "input",
+                () => {
 
-                this.searchHandbook(this.searchInput.value);
+                    this.searchHandbook(
+                        this.searchInput.value
+                    );
 
-            });
+                }
+            );
 
         }
 
@@ -152,43 +180,73 @@ const App = {
 
         if (this.searchResults) {
 
-            this.searchResults.addEventListener("click", async (event) => {
+            this.searchResults.addEventListener(
+                "click",
+                async (event) => {
 
-                const result = event.target.closest("[data-search-page]");
+                    const result =
+                        event.target.closest(
+                            "[data-search-page]"
+                        );
 
-                if (!result) return;
+                    if (!result) return;
 
-                const page = result.dataset.searchPage;
-                  const section = result.dataset.searchSection;
-                  const searchTerm = result.dataset.searchTerm;
 
-                this.closeSearch();
+                    const page =
+                        result.dataset.searchPage;
 
-                if (typeof Router !== "undefined") {
+                    const section =
+                        result.dataset.searchSection;
 
-                  await Router.loadPage(page, section, searchTerm);
+                    const searchTerm =
+                        result.dataset.searchTerm;
 
-                    document
-                        .querySelectorAll(".nav-link")
-                        .forEach(button => {
 
-                            button.classList.remove("active");
+                    this.closeSearch();
 
-                        });
 
-                    const navButton = document.querySelector(
-                        `.nav-link[data-page="${page}"]`
-                    );
+                    if (
+                        typeof Router !== "undefined"
+                    ) {
 
-                    if (navButton) {
+                        await Router.loadPage(
+                            page,
+                            section,
+                            searchTerm
+                        );
 
-                        navButton.classList.add("active");
+
+                        document
+                            .querySelectorAll(
+                                ".nav-link"
+                            )
+                            .forEach(button => {
+
+                                button.classList.remove(
+                                    "active"
+                                );
+
+                            });
+
+
+                        const navButton =
+                            document.querySelector(
+                                `.nav-link[data-page="${page}"]`
+                            );
+
+
+                        if (navButton) {
+
+                            navButton.classList.add(
+                                "active"
+                            );
+
+                        }
 
                     }
 
                 }
-
-            });
+            );
 
         }
 
@@ -197,27 +255,33 @@ const App = {
            WINDOW RESIZE
         ============================== */
 
-        window.addEventListener("resize", () => {
+        window.addEventListener(
+            "resize",
+            () => {
 
-            this.handleResize();
+                this.handleResize();
 
-        });
+            }
+        );
 
 
         /* ==============================
            ESCAPE KEY
         ============================== */
 
-        document.addEventListener("keydown", (event) => {
+        document.addEventListener(
+            "keydown",
+            (event) => {
 
-            if (event.key === "Escape") {
+                if (event.key === "Escape") {
 
-                this.closeSidebar();
-                this.closeSearch();
+                    this.closeSidebar();
+                    this.closeSearch();
+
+                }
 
             }
-
-        });
+        );
 
 
         /* ==============================
@@ -227,15 +291,21 @@ const App = {
 
         if (this.searchOverlay) {
 
-            this.searchOverlay.addEventListener("click", (event) => {
+            this.searchOverlay.addEventListener(
+                "click",
+                (event) => {
 
-                if (event.target === this.searchOverlay) {
+                    if (
+                        event.target ===
+                        this.searchOverlay
+                    ) {
 
-                    this.closeSearch();
+                        this.closeSearch();
+
+                    }
 
                 }
-
-            });
+            );
 
         }
 
@@ -244,51 +314,148 @@ const App = {
            SHARE HANDBOOK
         ============================== */
 
-        document.addEventListener("click", async (event) => {
+        document.addEventListener(
+            "click",
+            async (event) => {
 
-            const shareButton = event.target.closest("#shareHandbook");
+                const shareButton =
+                    event.target.closest(
+                        "#shareHandbook"
+                    );
 
-            if (!shareButton) return;
+                if (!shareButton) return;
 
-            const shareData = {
 
-                title: "Elite Township Properties | Client Handbook",
+                const shareData = {
 
-                text: "Check out the Elite Township Properties Interactive Client Handbook.",
+                    title:
+                        "Elite Township Properties | Client Handbook",
 
-                url: window.location.href
+                    text:
+                        "Check out the Elite Township Properties Interactive Client Handbook.",
 
-            };
+                    url:
+                        window.location.href
 
-            try {
+                };
 
-                if (navigator.share) {
 
-                    await navigator.share(shareData);
+                try {
 
-                } else {
+                    if (navigator.share) {
 
-                    await navigator.clipboard.writeText(window.location.href);
+                        await navigator.share(
+                            shareData
+                        );
 
-                    const originalText = shareButton.textContent;
+                    } else {
 
-                    shareButton.textContent = "✓ Link Copied!";
+                        await navigator.clipboard.writeText(
+                            window.location.href
+                        );
 
-                    setTimeout(() => {
+                        const originalText =
+                            shareButton.textContent;
 
-                        shareButton.textContent = originalText;
+                        shareButton.textContent =
+                            "✓ Link Copied!";
 
-                    }, 2000);
+                        setTimeout(() => {
+
+                            shareButton.textContent =
+                                originalText;
+
+                        }, 2000);
+
+                    }
+
+                } catch (error) {
+
+                    console.log(
+                        "Share cancelled or unavailable."
+                    );
 
                 }
 
-            } catch (error) {
+            }
+        );
 
-                console.log("Share cancelled or unavailable.");
+
+        /* ==============================
+           POPULAR TOPICS
+        ============================== */
+
+        document.addEventListener(
+            "click",
+            async (event) => {
+
+                const topic =
+                    event.target.closest(
+                        ".topic-card"
+                    );
+
+                if (!topic) return;
+
+
+                const page =
+                    topic.dataset.searchPage;
+
+                const section =
+                    topic.dataset.searchSection;
+
+                const searchTerm =
+                    topic.dataset.searchTerm;
+
+
+                if (
+                    !page ||
+                    !section ||
+                    !searchTerm
+                ) return;
+
+
+                if (
+                    typeof Router !== "undefined"
+                ) {
+
+                    await Router.loadPage(
+                        page,
+                        section,
+                        searchTerm
+                    );
+
+
+                    document
+                        .querySelectorAll(
+                            ".nav-link"
+                        )
+                        .forEach(button => {
+
+                            button.classList.remove(
+                                "active"
+                            );
+
+                        });
+
+
+                    const navButton =
+                        document.querySelector(
+                            `.nav-link[data-page="${page}"]`
+                        );
+
+
+                    if (navButton) {
+
+                        navButton.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                }
 
             }
-
-        });
+        );
 
     },
 
@@ -301,7 +468,9 @@ const App = {
 
         if (!this.sidebar) return;
 
-        this.sidebar.classList.toggle("sidebar-open");
+        this.sidebar.classList.toggle(
+            "sidebar-open"
+        );
 
     },
 
@@ -310,7 +479,9 @@ const App = {
 
         if (!this.sidebar) return;
 
-        this.sidebar.classList.remove("sidebar-open");
+        this.sidebar.classList.remove(
+            "sidebar-open"
+        );
 
     },
 
@@ -323,7 +494,9 @@ const App = {
 
         if (!this.searchOverlay) return;
 
-        this.searchOverlay.classList.add("search-open");
+        this.searchOverlay.classList.add(
+            "search-open"
+        );
 
         setTimeout(() => {
 
@@ -342,7 +515,9 @@ const App = {
 
         if (!this.searchOverlay) return;
 
-        this.searchOverlay.classList.remove("search-open");
+        this.searchOverlay.classList.remove(
+            "search-open"
+        );
 
     },
 
@@ -351,7 +526,8 @@ const App = {
 
         if (!this.searchResults) return;
 
-        const searchTerm = query.trim().toLowerCase();
+        const searchTerm =
+            query.trim().toLowerCase();
 
 
         if (searchTerm.length < 2) {
@@ -386,31 +562,43 @@ const App = {
         const matches = [];
 
 
-        for (const [page, details] of Object.entries(this.searchPages)) {
+        for (
+            const [page, details]
+            of Object.entries(this.searchPages)
+        ) {
 
             try {
 
-                const response = await fetch(details.path);
+                const response =
+                    await fetch(details.path);
 
                 if (!response.ok) continue;
 
-                const html = await response.text();
 
-                const temporaryElement = document.createElement("div");
-
-                temporaryElement.innerHTML = html;
+                const html =
+                    await response.text();
 
 
-                const headings = temporaryElement.querySelectorAll(
-                    "h1, h2, h3, h4, h5, h6"
-                );
+                const temporaryElement =
+                    document.createElement("div");
+
+                temporaryElement.innerHTML =
+                    html;
+
+
+                const headings =
+                    temporaryElement.querySelectorAll(
+                        "h1, h2, h3, h4, h5, h6"
+                    );
 
 
                 if (headings.length === 0) {
 
-                    const pageText = temporaryElement.textContent
-                        .replace(/\s+/g, " ")
-                        .trim();
+                    const pageText =
+                        temporaryElement.textContent
+                            .replace(/\s+/g, " ")
+                            .trim();
+
 
                     this.findMatchesInText(
                         pageText,
@@ -423,68 +611,73 @@ const App = {
 
                 } else {
 
-                    headings.forEach((heading, index) => {
+                    headings.forEach(
+                        heading => {
 
-                        const sectionTitle =
-                            heading.textContent.trim() ||
-                            details.title;
-
-
-                        let sectionText = "";
-
-                        let currentElement =
-                            heading.nextElementSibling;
+                            const sectionTitle =
+                                heading.textContent.trim() ||
+                                details.title;
 
 
-                        while (currentElement) {
+                            let sectionText = "";
 
-                            if (
-                                /^H[1-6]$/.test(
-                                    currentElement.tagName
-                                )
-                            ) {
 
-                                break;
+                            let currentElement =
+                                heading.nextElementSibling;
+
+
+                            while (currentElement) {
+
+                                if (
+                                    /^H[1-6]$/.test(
+                                        currentElement.tagName
+                                    )
+                                ) {
+
+                                    break;
+
+                                }
+
+
+                                sectionText +=
+                                    " " +
+                                    currentElement.textContent;
+
+
+                                currentElement =
+                                    currentElement.nextElementSibling;
 
                             }
 
 
-                            sectionText +=
-                                " " +
-                                currentElement.textContent;
-
-
-                            currentElement =
-                                currentElement.nextElementSibling;
-
-                        }
-
-
-                        sectionText = sectionText
-                            .replace(/\s+/g, " ")
-                            .trim();
-
-
-                        if (!sectionText) {
-
                             sectionText =
-                                heading.parentElement.textContent
+                                sectionText
                                     .replace(/\s+/g, " ")
                                     .trim();
 
+
+                            if (!sectionText) {
+
+                                sectionText =
+                                    heading.parentElement
+                                        .textContent
+                                        .replace(/\s+/g, " ")
+                                        .trim();
+
+                            }
+
+
+                            this.findMatchesInText(
+                                sectionText,
+                                searchTerm,
+                                page,
+                                details.title,
+                                sectionTitle,
+                                matches
+                            );
+
                         }
-
-
-                        this.findMatchesInText(
-                            sectionText,
-                            searchTerm,
-                            page,
-                            details.title,
-                            sectionTitle,
-                            matches
-                        );
-
-                    });
+                    );
 
                 }
 
@@ -517,7 +710,9 @@ const App = {
         matches
     ) {
 
-        const lowerText = text.toLowerCase();
+        const lowerText =
+            text.toLowerCase();
+
 
         let position = 0;
 
@@ -526,10 +721,11 @@ const App = {
 
         while (resultsAdded < 3) {
 
-            position = lowerText.indexOf(
-                searchTerm,
-                position
-            );
+            position =
+                lowerText.indexOf(
+                    searchTerm,
+                    position
+                );
 
 
             if (position === -1) {
@@ -539,25 +735,33 @@ const App = {
             }
 
 
-            const start = Math.max(
-                0,
-                position - 60
-            );
+            const start =
+                Math.max(
+                    0,
+                    position - 60
+                );
 
 
-            const end = Math.min(
-                text.length,
-                position + searchTerm.length + 100
-            );
+            const end =
+                Math.min(
+                    text.length,
+                    position +
+                    searchTerm.length +
+                    100
+                );
 
 
             let preview =
-                text.substring(start, end).trim();
+                text.substring(
+                    start,
+                    end
+                ).trim();
 
 
             if (start > 0) {
 
-                preview = "..." + preview;
+                preview =
+                    "..." + preview;
 
             }
 
@@ -579,7 +783,8 @@ const App = {
             });
 
 
-            position += searchTerm.length;
+            position +=
+                searchTerm.length;
 
             resultsAdded++;
 
@@ -588,7 +793,10 @@ const App = {
     },
 
 
-    displaySearchResults(matches, searchTerm) {
+    displaySearchResults(
+        matches,
+        searchTerm
+    ) {
 
         if (!this.searchResults) return;
 
@@ -611,50 +819,62 @@ const App = {
         }
 
 
-        this.searchResults.innerHTML = matches.map(result => `
+        this.searchResults.innerHTML =
+            matches.map(result => `
 
-           <button
-                class="search-result"
-                data-search-page="${result.page}"
-                data-search-section="${this.escapeHTML(result.sectionTitle)}"
-                data-search-term="${this.escapeHTML(searchTerm)}">
-    
-                <span class="search-result-title">
+                <button
+                    class="search-result"
+                    data-search-page="${result.page}"
+                    data-search-section="${this.escapeHTML(result.sectionTitle)}"
+                    data-search-term="${this.escapeHTML(searchTerm)}">
 
-                    ${this.escapeHTML(result.pageTitle)}
+                    <span class="search-result-title">
 
-                </span>
+                        ${this.escapeHTML(
+                            result.pageTitle
+                        )}
 
-                <span class="search-result-section">
+                    </span>
 
-                    ${this.escapeHTML(result.sectionTitle)}
+                    <span class="search-result-section">
 
-                </span>
+                        ${this.escapeHTML(
+                            result.sectionTitle
+                        )}
 
-                <span class="search-result-preview">
+                    </span>
 
-                    ${this.highlightSearchTerm(
-                        result.preview,
-                        searchTerm
-                    )}
+                    <span class="search-result-preview">
 
-                </span>
+                        ${this.highlightSearchTerm(
+                            result.preview,
+                            searchTerm
+                        )}
 
-            </button>
+                    </span>
 
-        `).join("");
+                </button>
+
+            `).join("");
 
     },
 
 
-    highlightSearchTerm(text, searchTerm) {
+    highlightSearchTerm(
+        text,
+        searchTerm
+    ) {
 
-        const escapedText = this.escapeHTML(text);
+        const escapedText =
+            this.escapeHTML(text);
 
-        const expression = new RegExp(
-            `(${this.escapeRegExp(searchTerm)})`,
-            "gi"
-        );
+
+        const expression =
+            new RegExp(
+                `(${this.escapeRegExp(searchTerm)})`,
+                "gi"
+            );
+
 
         return escapedText.replace(
             expression,
@@ -676,9 +896,11 @@ const App = {
 
     escapeHTML(text) {
 
-        const element = document.createElement("div");
+        const element =
+            document.createElement("div");
 
-        element.textContent = text;
+        element.textContent =
+            text;
 
         return element.innerHTML;
 
@@ -693,6 +915,7 @@ const App = {
 
         if (!this.sidebar) return;
 
+
         if (window.innerWidth > 768) {
 
             this.sidebar.classList.remove(
@@ -706,8 +929,11 @@ const App = {
 };
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    App.initialize();
+        App.initialize();
 
-});
+    }
+);
