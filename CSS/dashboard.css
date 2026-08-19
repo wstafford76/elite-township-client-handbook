@@ -257,3 +257,198 @@
     }
 
 }
+/* ==========================================
+   Start Your Journey
+========================================== */
+
+.start-journey{
+
+    background:#f8f8f8;
+
+    padding:40px;
+
+    border-radius:12px;
+
+    border:1px solid #e5e5e5;
+
+}
+
+
+.section-intro{
+
+    max-width:750px;
+
+    margin-bottom:30px;
+
+}
+
+
+.section-intro h2{
+
+    margin-bottom:12px;
+
+}
+
+
+.section-intro p{
+
+    line-height:1.7;
+
+    color:#555;
+
+}
+
+
+.journey-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(300px,1fr));
+
+    gap:18px;
+
+}
+
+
+.journey-card{
+
+    display:flex;
+
+    align-items:center;
+
+    text-align:left;
+
+    width:100%;
+
+    background:#ffffff;
+
+    border:1px solid #ddd;
+
+    border-left:5px solid #d4af37;
+
+    border-radius:10px;
+
+    padding:22px;
+
+    cursor:pointer;
+
+    font:inherit;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+
+}
+
+
+.journey-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.10);
+
+}
+
+
+.journey-icon{
+
+    font-size:2rem;
+
+    margin-right:18px;
+
+}
+
+
+.journey-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+}
+
+
+.journey-content strong{
+
+    font-size:1.05rem;
+
+    margin-bottom:7px;
+
+    color:#1a1a1a;
+
+}
+
+
+.journey-content small{
+
+    font-size:.9rem;
+
+    line-height:1.5;
+
+    color:#666;
+
+}
+
+
+.journey-arrow{
+
+    font-size:1.5rem;
+
+    color:#d4af37;
+
+    margin-left:15px;
+
+    transition:transform .25s ease;
+
+}
+
+
+.journey-card:hover .journey-arrow{
+
+    transform:translateX(5px);
+
+}
+
+
+/* ==========================================
+   Mobile
+========================================== */
+
+@media (max-width:768px){
+
+    .start-journey{
+
+        padding:25px;
+
+    }
+
+
+    .journey-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .journey-card{
+
+        padding:18px;
+
+    }
+
+
+    .journey-icon{
+
+        font-size:1.7rem;
+
+        margin-right:14px;
+
+    }
+
+}
