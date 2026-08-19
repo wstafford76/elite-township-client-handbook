@@ -401,13 +401,13 @@ const App = {
     <div class="topics-grid">
 
 
-        <!-- BUYER -->
+        <!-- FINANCING -->
 
         <button
             class="topic-card"
-            data-search-page="buyer"
-            data-search-section="Financing"
-            data-search-term="financing">
+            data-page="buyer"
+            data-section="Financing"
+            data-term="financing">
 
             <span class="topic-icon">💰</span>
 
@@ -427,13 +427,13 @@ const App = {
         </button>
 
 
-        <!-- BUYER -->
+        <!-- HOME INSPECTIONS -->
 
         <button
             class="topic-card"
-            data-search-page="buyer"
-            data-search-section="Home Inspection"
-            data-search-term="inspection">
+            data-page="buyer"
+            data-section="Home Inspection"
+            data-term="inspection">
 
             <span class="topic-icon">🔍</span>
 
@@ -453,13 +453,13 @@ const App = {
         </button>
 
 
-        <!-- SELLER -->
+        <!-- SELLER PRICING -->
 
         <button
             class="topic-card"
-            data-search-page="seller"
-            data-search-section="Pricing Your Home"
-            data-search-term="pricing">
+            data-page="seller"
+            data-section="Pricing Your Home"
+            data-term="pricing">
 
             <span class="topic-icon">📊</span>
 
@@ -479,13 +479,13 @@ const App = {
         </button>
 
 
-        <!-- TENANT -->
+        <!-- SECURITY DEPOSITS -->
 
         <button
             class="topic-card"
-            data-search-page="tenant"
-            data-search-section="Security Deposit"
-            data-search-term="deposit">
+            data-page="tenant"
+            data-section="Security Deposit"
+            data-term="deposit">
 
             <span class="topic-icon">🔑</span>
 
@@ -505,13 +505,13 @@ const App = {
         </button>
 
 
-        <!-- LANDLORD -->
+        <!-- PREPARING RENTAL -->
 
         <button
             class="topic-card"
-            data-search-page="landlord"
-            data-search-section="Preparing Your Property"
-            data-search-term="preparing">
+            data-page="landlord"
+            data-section="Preparing Your Property"
+            data-term="preparing">
 
             <span class="topic-icon">🏘️</span>
 
@@ -531,13 +531,13 @@ const App = {
         </button>
 
 
-        <!-- TENANT -->
+        <!-- MOVING IN -->
 
         <button
             class="topic-card"
-            data-search-page="tenant"
-            data-search-section="Moving In"
-            data-search-term="move-in">
+            data-page="tenant"
+            data-section="Moving In"
+            data-term="move-in">
 
             <span class="topic-icon">📦</span>
 
