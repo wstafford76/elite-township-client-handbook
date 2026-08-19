@@ -389,11 +389,18 @@ document.addEventListener(
     async (event) => {
 
         const topic =
-            event.target.closest(
-                ".topic-card"
-            );
+            event.target.closest(".topic-card");
 
         if (!topic) return;
+
+
+        /*
+        Prevent the general router click
+        handler from also handling this click.
+        */
+
+        event.preventDefault();
+        event.stopPropagation();
 
 
         const page =
@@ -406,48 +413,70 @@ document.addEventListener(
             topic.dataset.term;
 
 
-        if (!page) return;
+        if (!page) {
 
-
-        if (
-            typeof Router !== "undefined"
-        ) {
-
-            await Router.loadPage(
-                page,
-                section || null,
-                searchTerm || null
+            console.error(
+                "Popular Topic is missing data-page."
             );
 
+            return;
 
-            document
-                .querySelectorAll(
-                    ".nav-link"
-                )
-                .forEach(button => {
-
-                    button.classList.remove(
-                        "active"
-                    );
-
-                });
+        }
 
 
-            const navButton =
-                document.querySelector(
-                    `.nav-link[data-page="${page}"]`
-                );
+        if (typeof Router === "undefined") {
+
+            console.error(
+                "Router is not available."
+            );
+
+            return;
+
+        }
 
 
-            if (navButton) {
+        await Router.loadPage(
+            page,
+            section || null,
+            searchTerm || null
+        );
 
-                navButton.classList.add(
+
+        /*
+        Update sidebar active button.
+        */
+
+        document
+            .querySelectorAll(".nav-link")
+            .forEach(button => {
+
+                button.classList.remove(
                     "active"
                 );
 
-            }
+            });
+
+
+        const navButton =
+            document.querySelector(
+                `.nav-link[data-page="${page}"]`
+            );
+
+
+        if (navButton) {
+
+            navButton.classList.add(
+                "active"
+            );
 
         }
+
+
+        /*
+        Close mobile sidebar if open.
+        */
+
+        this.closeSidebar();
 
     }
 );
