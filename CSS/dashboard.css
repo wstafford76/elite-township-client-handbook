@@ -452,3 +452,158 @@
     }
 
 }
+/* ==========================================
+   Popular Topics
+========================================== */
+
+.popular-topics{
+
+    background:#ffffff;
+
+    padding:40px;
+
+    border-radius:12px;
+
+    border:1px solid #e5e5e5;
+
+}
+
+
+.topics-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(280px,1fr));
+
+    gap:18px;
+
+}
+
+
+.topic-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    width:100%;
+
+    padding:22px;
+
+    background:#f8f8f8;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    font:inherit;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+
+}
+
+
+.topic-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#d4af37;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.10);
+
+}
+
+
+.topic-icon{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:48px;
+
+    height:48px;
+
+    font-size:1.6rem;
+
+    background:#ffffff;
+
+    border-radius:50%;
+
+    border:1px solid #e5e5e5;
+
+}
+
+
+.topic-card > span:last-child{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.topic-card strong{
+
+    color:#1a1a1a;
+
+    font-size:1rem;
+
+    margin-bottom:5px;
+
+}
+
+
+.topic-card small{
+
+    color:#666;
+
+    font-size:.88rem;
+
+    line-height:1.5;
+
+}
+
+
+/* ==========================================
+   Popular Topics - Mobile
+========================================== */
+
+@media (max-width:768px){
+
+    .popular-topics{
+
+        padding:25px;
+
+    }
+
+
+    .topics-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .topic-card{
+
+        padding:18px;
+
+    }
+
+}
