@@ -1,5 +1,9 @@
 <section class="dashboard">
 
+    <!-- =====================================
+         WELCOME HERO
+    ====================================== -->
+
     <section class="dashboard-hero">
 
         <h1>Welcome to Your Client Handbook</h1>
@@ -7,20 +11,140 @@
         <p>
             Thank you for choosing Elite Township Properties. This handbook
             will guide you through every step of your real estate journey.
-            Whether you're buying, selling, or leasing, everything you need
-            is organized in one convenient place.
+            Whether you're buying, selling, renting, or managing a rental
+            property, everything you need is organized in one convenient place.
         </p>
-                <button class="share-handbook" id="shareHandbook">
+
+        <button class="share-handbook" id="shareHandbook">
             <span>↗</span> Share the Handbook
         </button>
 
     </section>
+
+
+    <!-- =====================================
+         START YOUR JOURNEY
+    ====================================== -->
+
+    <section class="dashboard-section start-journey">
+
+        <div class="section-intro">
+
+            <h2>Start Your Journey</h2>
+
+            <p>
+                Not sure where to begin? Choose the option that best describes
+                your current real estate needs, and we'll guide you through the
+                process step by step.
+            </p>
+
+        </div>
+
+
+        <div class="journey-grid">
+
+            <button
+                class="journey-card"
+                data-page="buyer">
+
+                <span class="journey-icon">🏡</span>
+
+                <span class="journey-content">
+
+                    <strong>I'm Buying a Home</strong>
+
+                    <small>
+                        Learn about financing, home searching, inspections,
+                        offers, and closing.
+                    </small>
+
+                </span>
+
+                <span class="journey-arrow">→</span>
+
+            </button>
+
+
+            <button
+                class="journey-card"
+                data-page="seller">
+
+                <span class="journey-icon">🏠</span>
+
+                <span class="journey-content">
+
+                    <strong>I'm Selling a Home</strong>
+
+                    <small>
+                        Understand pricing, preparing your home, marketing,
+                        offers, and closing.
+                    </small>
+
+                </span>
+
+                <span class="journey-arrow">→</span>
+
+            </button>
+
+
+            <button
+                class="journey-card"
+                data-page="tenant">
+
+                <span class="journey-icon">🔑</span>
+
+                <span class="journey-content">
+
+                    <strong>I'm Looking to Rent</strong>
+
+                    <small>
+                        Explore applications, deposits, leases, move-in,
+                        and tenant responsibilities.
+                    </small>
+
+                </span>
+
+                <span class="journey-arrow">→</span>
+
+            </button>
+
+
+            <button
+                class="journey-card"
+                data-page="landlord">
+
+                <span class="journey-icon">🏘️</span>
+
+                <span class="journey-content">
+
+                    <strong>I'm a Landlord</strong>
+
+                    <small>
+                        Learn about preparing, marketing, leasing, and
+                        managing your rental property.
+                    </small>
+
+                </span>
+
+                <span class="journey-arrow">→</span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         QUICK START GUIDES
+    ====================================== -->
 
     <section class="dashboard-section">
 
         <h2>Quick Start</h2>
 
         <div class="quick-start-grid">
+
 
             <article class="dashboard-card">
 
@@ -31,15 +155,16 @@
                     to closing.
                 </p>
 
-                 <button
-        class="dashboard-button"
-        onclick="document.querySelector('[data-page=&quot;buyer&quot;]').click();">
+                <button
+                    class="dashboard-button"
+                    data-page="buyer">
 
-        Open Buyer Guide →
+                    Open Buyer Guide →
 
-    </button>
+                </button>
 
             </article>
+
 
             <article class="dashboard-card">
 
@@ -48,11 +173,17 @@
                 <p>
                     Understand pricing, marketing, negotiations, and closing.
                 </p>
-               <button class="dashboard-button" data-page="seller">
-    Open Seller Guide →
-</button>
+
+                <button
+                    class="dashboard-button"
+                    data-page="seller">
+
+                    Open Seller Guide →
+
+                </button>
 
             </article>
+
 
             <article class="dashboard-card">
 
@@ -61,30 +192,46 @@
                 <p>
                     Leasing, applications, deposits, move-in, and more.
                 </p>
-                <button class="dashboard-button" data-page="tenant">
-    Open Tenant Guide →
-</button>
+
+                <button
+                    class="dashboard-button"
+                    data-page="tenant">
+
+                    Open Tenant Guide →
+
+                </button>
 
             </article>
+
+
             <article class="dashboard-card">
 
-    <h3>🏘️ Landlord Guide</h3>
+                <h3>🏘️ Landlord Guide</h3>
 
-    <p>
-        Learn how to prepare, market, lease, and manage your rental property
-        from the initial planning stages through tenant move-in, renewal, or
-        move-out.
-    </p>
+                <p>
+                    Learn how to prepare, market, lease, and manage your rental
+                    property from the initial planning stages through tenant
+                    move-in, renewal, or move-out.
+                </p>
 
-    <button class="dashboard-button" data-page="landlord">
-        Open Landlord Guide →
-    </button>
+                <button
+                    class="dashboard-button"
+                    data-page="landlord">
 
-</article>
+                    Open Landlord Guide →
+
+                </button>
+
+            </article>
 
         </div>
 
     </section>
+
+
+    <!-- =====================================
+         TRANSACTION ROADMAP
+    ====================================== -->
 
     <section class="dashboard-section">
 
@@ -93,36 +240,52 @@
         <div class="roadmap">
 
             <div class="roadmap-step">
+
                 <span>1</span>
+
                 Consultation
+
             </div>
 
+
             <div class="roadmap-step">
+
                 <span>2</span>
+
                 Planning
+
             </div>
 
+
             <div class="roadmap-step">
+
                 <span>3</span>
+
                 Preparation
+
             </div>
 
+
             <div class="roadmap-step">
+
                 <span>4</span>
+
                 Agreement
+
             </div>
 
+
             <div class="roadmap-step">
+
                 <span>5</span>
+
                 Completion
+
             </div>
 
         </div>
 
     </section>
 
-  
-
-   
 
 </section>
