@@ -1733,3 +1733,20 @@ p{
 
 }
 }
+
+/* ==========================================
+   SELLER GUIDE - STEP 3 IMAGE
+========================================== */
+
+#seller-step3 .guide-step-image{
+    height:auto;
+    overflow:visible;
+}
+
+#seller-step3 .guide-step-image img{
+    width:90%;
+    height:auto;
+    object-fit:contain;
+    margin:0 auto;
+    display:block;
+}
