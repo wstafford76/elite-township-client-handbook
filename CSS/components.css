@@ -642,3 +642,17 @@
     transform: translateX(2px);
 
 }
+
+/* ==========================================
+   SIDEBAR ICON COLOR OVERRIDE
+========================================== */
+
+.nav-icon {
+    color: #d4af37 !important;
+}
+
+.nav-icon svg {
+    fill: none !important;
+    stroke: #d4af37 !important;
+    color: #d4af37 !important;
+}
