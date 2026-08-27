@@ -1719,3 +1719,15 @@ p{
     flex-shrink:0;
 
 }
+
+/* ==========================================
+   SELLER GUIDE - STEP 2 IMAGE
+========================================== */
+
+#seller-step2 .guide-step-image img{
+
+    height:auto;
+
+    object-fit:contain;
+
+}
