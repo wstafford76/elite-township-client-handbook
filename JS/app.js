@@ -481,6 +481,8 @@ document.addEventListener(
     }
 );
 
+},
+
     /* ==============================
        SIDEBAR FUNCTIONS
     ============================== */
